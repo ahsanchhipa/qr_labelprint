@@ -56,14 +56,18 @@ def create_pdf_with_qr_from_csv(csv_file, label_width, label_height, selected_fi
         # Remove temporary QR image
         os.remove(qr_img_path)
 
-        # Add selected fields as text
+        # Add selected fields as text with bold effect
         text_x = qr_x + qr_size + padding
         text_y = label_height - padding - 0.35 * cm  # Start below the top margin text up and down
 
         c.setFont("Helvetica-Bold", 5.5)  # Adjust font size for label fit
+
         for idx, field in enumerate(selected_fields):
             field_value = row.get(field, "N/A")
-            c.drawString(text_x, text_y - idx * 0.6 * cm, f"{field}: {field_value}")
+            
+            # Apply boldness by drawing text multiple times at the exact position (overlap properly)
+            for offset in range(4):  # Draw 4 layers of the same text with slight overlap
+                c.drawString(text_x + offset * 0.1, text_y - idx * 0.6 * cm + offset * 0, f"{field}: {field_value}")
 
         # Start a new page for each label
         c.showPage()
@@ -107,5 +111,3 @@ if uploaded_csv is not None:
         )
     except Exception as e:
         st.error(f"An error occurred: {e}")
-
-
