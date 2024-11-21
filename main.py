@@ -58,7 +58,7 @@ def create_pdf_with_qr_from_csv(csv_file, label_width, label_height, selected_fi
 
         # Add selected fields as text with bold effect
         text_x = qr_x + qr_size + padding
-        text_y = label_height - padding - 0.35 * cm  # Start below the top margin text up and down
+        text_y = label_height - padding - 0.55 * cm  # Start below the top margin text up and down
 
         c.setFont("Helvetica-Bold", 5.5)  # Adjust font size for label fit
 
@@ -67,7 +67,7 @@ def create_pdf_with_qr_from_csv(csv_file, label_width, label_height, selected_fi
             
             # Apply boldness by drawing text multiple times at the exact position (overlap properly)
             for offset in range(8):  # Draw 4 layers of the same text with slight overlap
-                c.drawString(text_x + offset * 0.03, text_y + offset *0.03 - idx * 0.6 * cm + offset * 0.01, f"{field}: {field_value}")
+                c.drawString(text_x + offset * 0, text_y + offset *0 - idx * 0.4 * cm + offset * 0.01, f"{field}: {field_value}")
 
         # Start a new page for each label
         c.showPage()
