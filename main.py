@@ -1,3 +1,4 @@
+
 import streamlit as st
 import csv
 from io import StringIO, BytesIO
@@ -8,8 +9,8 @@ from reportlab.pdfbase.ttfonts import TTFont
 import qrcode
 import os
 
-# Register Arial Bold font
-arial_bold_path = "C:/Windows/Fonts/arialbd.ttf"  # Update path as needed for your system
+# Register Arial Bold font (use relative path)
+arial_bold_path = "fonts/arialbd.ttf"  # Ensure the font file is in the "fonts" folder in your project
 pdfmetrics.registerFont(TTFont("Arial-Bold", arial_bold_path))
 
 # Function to generate QR code
@@ -67,7 +68,7 @@ def create_pdf_with_qr_from_csv(csv_file, label_width, label_height, selected_fi
         text_y = label_height - padding - 0.35 * cm  # Start below the top margin text up and down
 
         # Set font to Arial-Bold
-        c.setFont("Arial-Bold", 6.1)  # Adjust font size for label fit
+        c.setFont("Arial-Bold", 5.5)  # Adjust font size for label fit
         for idx, field in enumerate(selected_fields):
             field_value = row.get(field, "N/A")
             c.drawString(text_x, text_y - idx * 0.6 * cm, f"{field}: {field_value}")
