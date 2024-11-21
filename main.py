@@ -3,8 +3,14 @@ import csv
 from io import StringIO, BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import cm
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 import qrcode
 import os
+
+# Register Arial Bold font
+arial_bold_path = "C:/Windows/Fonts/arialbd.ttf"  # Update path as needed for your system
+pdfmetrics.registerFont(TTFont("Arial-Bold", arial_bold_path))
 
 # Function to generate QR code
 def generate_qr_code(data):
@@ -60,7 +66,8 @@ def create_pdf_with_qr_from_csv(csv_file, label_width, label_height, selected_fi
         text_x = qr_x + qr_size + padding
         text_y = label_height - padding - 0.35 * cm  # Start below the top margin text up and down
 
-        c.setFont("Helvetica-Bold", 5.5)  # Adjust font size for label fit
+        # Set font to Arial-Bold
+        c.setFont("Arial-Bold", 6.1)  # Adjust font size for label fit
         for idx, field in enumerate(selected_fields):
             field_value = row.get(field, "N/A")
             c.drawString(text_x, text_y - idx * 0.6 * cm, f"{field}: {field_value}")
