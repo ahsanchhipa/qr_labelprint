@@ -66,8 +66,8 @@ def create_pdf_with_qr_from_csv(csv_file, label_width, label_height, selected_fi
             field_value = row.get(field, "N/A")
             
             # Apply boldness by drawing text multiple times at the exact position (overlap properly)
-            for offset in range(4):  # Draw 4 layers of the same text with slight overlap
-                c.drawString(text_x + offset * 0.1, text_y - idx * 0.6 * cm + offset * 0, f"{field}: {field_value}")
+            for offset in range(8):  # Draw 4 layers of the same text with slight overlap
+                c.drawString(text_x + offset * 0.03, text_y + offset *0.03 - idx * 0.6 * cm + offset * 0.01, f"{field}: {field_value}")
 
         # Start a new page for each label
         c.showPage()
